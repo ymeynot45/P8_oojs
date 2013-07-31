@@ -1,30 +1,40 @@
-$(document).ready(function() {
-  var dicecup = new Array();
+var dicecup = new Array();
 
-  $('#roller button.add').on('click', function() {
-    var dice = new Die();
-    $('.dice').append(dice.home);
-    dicecup.push(dice);
+dicecup.makeDie = function () {
+  var dice = new Die();
+  $('.dice').append(dice.home);
+  dicecup.push(dice);
+};
+
+dicecup.prepdice = function() {
+  $.each(dicecup, function(index, die) {
+  die.roll();
+  $(".dice div:nth-child(" + (index + 1)  + ")").text(die.value);
   });
+};
+
+function Die(){
+  this.value = 0;   
+};
+
+Die.prototype = {
+  home: '<div class="die"></div>',
+  roll: function() {
+    this.value = Math.floor((Math.random()*6)+1);
+  }
+};
+
+$(document).ready(function() {
+
+  $('#roller button.add').on('click', dicecup.makeDie);
 
 
   $('#roller button.roll').on('click', function() {
     $.each(dicecup, function(index, die) {
-      return die.value;
+      die.roll();
+      $(".dice div:nth-child(" + (index + 1)  + ")").text(die.value);
     });
   });
-
-  function Die(){
-    this.value = 0;   
-  };
-
-  Die.prototype = {
-    home: '<div class="die"><script>this.value</script></div>',
-    value: this.roll,
-    roll: function() {
-      return Math.floor((Math.random()*6)+1);
-    }
-  };
 });
 // $(document).ready(function() {
 //   $('#roller button.add').on('click', function() {

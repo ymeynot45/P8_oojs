@@ -99,4 +99,42 @@ Gadget.prototype = {
 
 ORANGE TREE lecture part 2
 
+var dicecup = new Array();
 
+dicecup.makeDie = function () {
+  var dice = new Die();
+  $('.dice').append(dice.home);
+  dicecup.push(dice);
+};
+
+dicecup.prepdice: function() {
+  $.each(dicecup, function(index, die) {
+  die.roll();
+  $(".dice div:nth-child(" + (index + 1)  + ")").text(die.value);
+  });
+};
+
+
+function Die(){
+  this.value = 0;   
+};
+
+Die.prototype = {
+  home: '<div class="die"></div>',
+  insert: function(index, die) {
+    die.roll();
+    $(".dice div:nth-child(" + (index + 1) + ")").text(die.value);
+  },
+
+  roll: function() {
+    this.value = Math.floor((Math.random()*6)+1);
+  }
+};
+
+$(document).ready(function() {
+
+  $('#roller button.add').on('click', dicecup.makeDie);
+
+
+  $('#roller button.roll').on('click', dicecup.prepdice );
+});
