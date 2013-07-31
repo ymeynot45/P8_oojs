@@ -1,0 +1,102 @@
+
+function Animal(name, legs){
+  this.name = name;
+  this.legs = legs;
+};
+  
+  Animal.prototype.identify = function(){
+    return "I am a " + this.name + " with " + this.legs + " legs.";
+  }
+
+
+
+  function Creature(){};
+
+  Animal.prototype = new Creature();
+
+
+var human = new Animal("Human", 2);
+
+var bob = object.create(human);
+
+bob.age = "old";
+
+bob.runningSpeed = "slow";
+
+bob {age: "old", runningSpeed: "slow"} -> human {name: "human", legs: 2} -> {identify: function...}
+
+
+var Zoo = {
+  init: function(animals){
+    this.animals = animals;
+  },
+  
+  bipeds: function(){
+    return this.animals.filter(function(animal){
+      return animal.legs === 2;
+    });
+  },
+
+  quadrupeds: function(){
+    return this.animals.filter(function(animal){
+      return animal.legs === 4;
+    });
+  }
+};
+
+
+// -------------------------------
+
+function assert(test, message) {
+  if (!test) {
+    throw "ERROR: " + message;
+  }
+  return true
+}
+
+var animals = [
+  new Animal("Human", 2),
+  new Animal("Monkey", 2),
+  new Animal("Kangaroo", 2),
+  new Animal("Horse", 4),
+  new Animal("Cow", 4),
+  new Animal("Centipede", 100),
+  ];
+
+do in console -->
+
+var a = {name: "Human"}
+a.identify = function(){ return "hello"};
+a
+
+c = {indentify: function(){ return "hello";}}
+
+d = object.create(c)
+e = object.create(d)
+
+d === e
+
+The below two are equal.
+
+Gadget.prototype.price = 100;
+Gadget.prototype.rating = 3;
+Gadget.prototype.getInfo = function() { 
+  return 'Rating: ' + this.rating + ', price: ' + this.price;
+};
+
+
+
+Gadget.prototype = { 
+  price: 100, 
+  rating: 3, 
+  getInfo: function() { 
+   return 'Rating: ' + this.rating + ', price: ' + this.price; 
+  }
+};
+
+
+
+
+ORANGE TREE lecture part 2
+
+
