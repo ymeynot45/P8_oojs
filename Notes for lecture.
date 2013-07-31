@@ -8,8 +8,6 @@ function Animal(name, legs){
     return "I am a " + this.name + " with " + this.legs + " legs.";
   }
 
-
-
   function Creature(){};
 
   Animal.prototype = new Creature();

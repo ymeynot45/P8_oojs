@@ -2,11 +2,12 @@ var dicecup = new Array();
 
 dicecup.makeDie = function () {
   var dice = new Die();
-  $('.dice').append(dice.home);
-  dicecup.push(dice);
+  dice.render();
+  dicecup.push(dice); // i could just pass new Die(); as the arg but then I would have to refigure the render.
+  // If I do it later it will rerender every time I roll the dice which is ineffiecent.
 };
 
-dicecup.prepdice = function() {
+dicecup.rolldice = function() {
   $.each(dicecup, function(index, die) {
   die.roll();
   $(".dice div:nth-child(" + (index + 1)  + ")").text(die.value);
@@ -21,6 +22,9 @@ Die.prototype = {
   home: '<div class="die"></div>',
   roll: function() {
     this.value = Math.floor((Math.random()*6)+1);
+  },
+  render: function(){
+    $('.dice').append(this.home);
   }
 };
 
@@ -28,24 +32,6 @@ $(document).ready(function() {
 
   $('#roller button.add').on('click', dicecup.makeDie);
 
-
-  $('#roller button.roll').on('click', function() {
-    $.each(dicecup, function(index, die) {
-      die.roll();
-      $(".dice div:nth-child(" + (index + 1)  + ")").text(die.value);
-    });
-  });
+  $('#roller button.roll').on('click', dicecup.rolldice);
 });
-// $(document).ready(function() {
-//   $('#roller button.add').on('click', function() {
-//     console.log("WAT")
-//     $('.dice').append('<div class="die">0</div>');
-//   });
 
-//   $('#roller button.roll').on('click', function() {
-//     $('.die').each(function(k, die) {
-//       var value = Math.floor((Math.random()*6)+1);
-//       $(die).text(value);
-//     });
-//   });
-// });
