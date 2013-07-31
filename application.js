@@ -19,12 +19,12 @@ function Die(){
 };
 
 Die.prototype = {
-  home: '<div class="die"></div>',
+  art: '<div class="die"></div>',
   roll: function() {
     this.value = Math.floor((Math.random()*6)+1);
   },
   render: function(){
-    $('.dice').append(this.home);
+    $('.dice').append(this.art);
   }
 };
 
